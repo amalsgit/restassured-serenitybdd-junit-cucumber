@@ -6,34 +6,36 @@ import com.freenow.blog.users.UserCalls;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import io.restassured.response.Response;
+import net.serenitybdd.rest.SerenityRest;
 
 
 public class GetUserSteps {
 
-  Response response;
-
   @When("I call the get user details endpoint for user \"(.*)\"")
   public void i_call_the_get_user_endpoint_for_user(String user) {
-    response = UserCalls.getUserDetails(user);
+    UserCalls.getUserDetails(user);
   }
 
   @Then("user details should be retrieved")
   public void user_details_should_be_retrieved() {
-    assertThat(response.statusCode()).as("Response code should be 200").isEqualTo(200);
-    assertThat(response.getBody().jsonPath().getList("id").get(0)).as("userid should be present").isNotNull();
+    assertThat(SerenityRest.lastResponse().statusCode()).as("Response code should be 200")
+        .isEqualTo(200);
+    assertThat(SerenityRest.lastResponse().getBody().jsonPath().getList("id").get(0))
+        .as("userid should be present")
+        .isNotNull();
   }
 
   @And("username should be \"(.*)\"")
   public void usernameShouldBe(String userName) {
-    assertThat(response.getBody().jsonPath().getList("username").get(0).toString())
+    assertThat(
+        SerenityRest.lastResponse().getBody().jsonPath().getList("username").get(0).toString())
         .as("User name should be equal to " + userName).isEqualToIgnoringCase(userName);
   }
 
   @Then("empty response should be returned")
   public void empty_response_should_be_returned() {
-    assertThat(response.statusCode()).as("Response code should be 200").isEqualTo(200);
-    assertThat(response.getBody().jsonPath().getList("").size()).as("Response should be empty")
-        .isEqualTo(0);
+    assertThat(SerenityRest.lastResponse().statusCode()).isEqualTo(200);
+    assertThat(SerenityRest.lastResponse().getBody().jsonPath().getList("").size()).isEqualTo(0);
+
   }
 }
