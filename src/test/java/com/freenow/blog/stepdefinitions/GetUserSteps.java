@@ -3,6 +3,8 @@ package com.freenow.blog.stepdefinitions;
 import static net.serenitybdd.rest.SerenityRest.lastResponse;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.freenow.blog.commontasks.CommonQuestions;
+import com.freenow.blog.users.UserCallQuestions;
 import com.freenow.blog.users.UserCalls;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
@@ -14,6 +16,12 @@ public class GetUserSteps {
 
   @Steps
   UserCalls userCalls;
+
+  @Steps
+  CommonQuestions commonQuestions;
+
+  @Steps
+  UserCallQuestions userCallQuestions;
 
   @When("I call the get user details endpoint for user \"(.*)\"")
   public void i_call_the_get_user_endpoint_for_user(String user) {
@@ -27,11 +35,8 @@ public class GetUserSteps {
 
   @Then("user details should be retrieved")
   public void user_details_should_be_retrieved() {
-    assertThat(lastResponse().statusCode()).as("Response code should be 200")
-        .isEqualTo(200);
-    assertThat(lastResponse().getBody().jsonPath().getList("id").get(0))
-        .as("userid should be present")
-        .isNotNull();
+    commonQuestions.responseCodeIs(200, lastResponse());
+    userCallQuestions.verifyUserProperties(lastResponse());
   }
 
   @And("username should be \"(.*)\"")
@@ -43,7 +48,7 @@ public class GetUserSteps {
 
   @Then("empty response should be returned")
   public void empty_response_should_be_returned() {
-    assertThat(lastResponse().statusCode()).isEqualTo(200);
+    commonQuestions.responseCodeIs(200, lastResponse());
     assertThat(lastResponse().getBody().jsonPath().getList("").size()).isEqualTo(0);
   }
 }

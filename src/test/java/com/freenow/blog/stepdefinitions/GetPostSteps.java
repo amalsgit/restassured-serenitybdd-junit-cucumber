@@ -3,6 +3,7 @@ package com.freenow.blog.stepdefinitions;
 import static net.serenitybdd.rest.SerenityRest.lastResponse;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.freenow.blog.commontasks.CommonQuestions;
 import com.freenow.blog.posts.BlogPostCalls;
 import com.freenow.blog.posts.BlogPostQuestions;
 import com.freenow.blog.users.UserCalls;
@@ -24,11 +25,14 @@ public class GetPostSteps {
   @Steps
   BlogPostCalls blogPostCalls;
 
+  @Steps
+  CommonQuestions commonQuestions;
+
   @Given("\"(.*)\" has few post to (?:.*) name in the blog")
   public void user_has_few_posts_in_the_blog(String user) {
     userCalls.getUserDetails(user);
-    assertThat(lastResponse().statusCode()).as("Response code should be 200")
-        .isEqualTo(200);
+    commonQuestions.responseCodeIs(200,lastResponse());
+
     int userId = lastResponse().getBody().jsonPath().getInt("[0].id");
     Serenity.setSessionVariable("userId").to(String.valueOf(userId));
   }
@@ -40,8 +44,7 @@ public class GetPostSteps {
 
   @Then("all posts by the user should be returned")
   public void all_posts_by_the_user_should_be_returned() {
-    assertThat(lastResponse().statusCode()).as("Response code should be 200")
-        .isEqualTo(200);
+    commonQuestions.responseCodeIs(200,lastResponse());
     assertThat(lastResponse().getBody().jsonPath().getInt("[0].userId"))
         .isEqualTo(Integer.valueOf(Serenity.sessionVariableCalled("userId")));
     List<Object> posts = lastResponse().jsonPath().getList("");
