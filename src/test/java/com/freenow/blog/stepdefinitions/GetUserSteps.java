@@ -7,18 +7,22 @@ import com.freenow.blog.users.UserCalls;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import net.thucydides.core.annotations.Steps;
 
 
 public class GetUserSteps {
 
+  @Steps
+  UserCalls userCalls;
+
   @When("I call the get user details endpoint for user \"(.*)\"")
   public void i_call_the_get_user_endpoint_for_user(String user) {
-    UserCalls.getUserDetails(user);
+    userCalls.getUserDetails(user);
   }
 
   @When("I call the get user details endpoint for non-existent user")
   public void i_call_the_get_user_endpoint_for_non_existent_user() {
-    UserCalls.getUserDetails("amal");
+    userCalls.getUserDetails("amal");
   }
 
   @Then("user details should be retrieved")
