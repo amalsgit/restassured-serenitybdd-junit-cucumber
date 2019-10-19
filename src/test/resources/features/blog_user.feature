@@ -8,5 +8,5 @@ Feature: Get user details
     And username should be "Samantha"
 
   Scenario: Empty response should be returned while searching for a non-existent user
-    When I call the get user details endpoint for user "Amal"
+    When I call the get user details endpoint for non-existent user
     Then empty response should be returned

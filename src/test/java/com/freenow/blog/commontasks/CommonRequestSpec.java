@@ -1,4 +1,4 @@
-package com.freenow.blog.users;
+package com.freenow.blog.commontasks;
 
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.specification.RequestSpecification;
@@ -6,12 +6,11 @@ import net.serenitybdd.core.environment.EnvironmentSpecificConfiguration;
 import net.thucydides.core.guice.Injectors;
 import net.thucydides.core.util.EnvironmentVariables;
 
-public class UserRequestSpec {
-
+public class CommonRequestSpec {
   /**
-   * Get Request Specification for get user calls
+   * Get Request Specification for blog endpoint
    *
-   * @return UserRequestSpec
+   * @return RequestSpecification
    */
   public static RequestSpecification blogReqSpec() {
     EnvironmentVariables environmentVariables = Injectors.getInjector()
@@ -20,7 +19,7 @@ public class UserRequestSpec {
     String baseUrl = EnvironmentSpecificConfiguration.from(environmentVariables)
         .getProperty("baseurl");
 
-    return new RequestSpecBuilder().setBaseUri(baseUrl).setBasePath("users")
+    return new RequestSpecBuilder().setBaseUri(baseUrl)
         .setContentType("application/json")
         .build();
   }

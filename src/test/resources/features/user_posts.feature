@@ -7,7 +7,6 @@ Feature: Get user blog posts
     When I call the endpoint to get posts by the user
     Then all posts by the user should be returned
 
-  @run
   Scenario: Empty response should be returned while searching with invalid userid
     When I call the endpoint to get posts by the user with invalid user id
     Then empty response should be returned
