@@ -1,7 +1,6 @@
 package com.freenow.blog.stepdefinitions;
 
 import static net.serenitybdd.rest.SerenityRest.lastResponse;
-import static org.assertj.core.api.Assertions.assertThat;
 
 import com.freenow.blog.commontasks.CommonQuestions;
 import com.freenow.blog.users.UserCallQuestions;
@@ -41,14 +40,12 @@ public class GetUserSteps {
 
   @And("username should be \"(.*)\"")
   public void usernameShouldBe(String userName) {
-    assertThat(
-        lastResponse().getBody().jsonPath().getList("username").get(0).toString())
-        .as("User name should be equal to " + userName).isEqualToIgnoringCase(userName);
+    userCallQuestions.validateUserName(userName, lastResponse());
   }
 
   @Then("empty response should be returned")
   public void empty_response_should_be_returned() {
     commonQuestions.responseCodeIs(200, lastResponse());
-    assertThat(lastResponse().getBody().jsonPath().getList("").size()).isEqualTo(0);
+    commonQuestions.responseShouldBeEmptyList(lastResponse());
   }
 }

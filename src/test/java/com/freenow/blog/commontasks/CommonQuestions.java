@@ -11,4 +11,9 @@ public class CommonQuestions {
   public void responseCodeIs(int responseCode, Response lastResponse) {
     assertThat(lastResponse.statusCode()).isEqualTo(responseCode);
   }
+
+  @Step("Verify that response is empty list")
+  public void responseShouldBeEmptyList(Response lastResponse) {
+    assertThat(lastResponse.getBody().jsonPath().getList("").size()).isEqualTo(0);
+  }
 }

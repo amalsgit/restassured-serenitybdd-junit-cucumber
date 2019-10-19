@@ -1,5 +1,6 @@
 package com.freenow.blog.comments;
 
+
 import io.restassured.response.Response;
 import net.thucydides.core.annotations.Step;
 import org.assertj.core.api.SoftAssertions;
@@ -15,5 +16,9 @@ public class CommentQuestions {
     softly.assertThat(lastResponse.getBody().jsonPath().getString("[0].email")).isNotNull();
     softly.assertThat(lastResponse.getBody().jsonPath().getString("[0].body")).isNotNull();
     softly.assertAll();
+
+//    Ensure.that(lastResponse.getBody().jsonPath().getString("[0].postId"), equalTo(notNullValue()));
+//
+//    Ensure.that("postId should be present",lastResponse.statusCode(),equalToIgnoringCase("asd"));
   }
 }
