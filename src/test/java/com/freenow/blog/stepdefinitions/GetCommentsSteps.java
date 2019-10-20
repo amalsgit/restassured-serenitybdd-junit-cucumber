@@ -5,11 +5,10 @@ import static net.serenitybdd.rest.SerenityRest.lastResponse;
 import com.freenow.blog.comments.CommentActions;
 import com.freenow.blog.comments.CommentQuestions;
 import com.freenow.blog.commontasks.CommonQuestions;
-import com.freenow.blog.commonutilities.ValidateEmail;
 import com.freenow.blog.posts.BlogPostActions;
 import com.freenow.blog.posts.BlogPostQuestions;
-import com.freenow.blog.users.BlogUserQuestions;
 import com.freenow.blog.users.BlogUserActions;
+import com.freenow.blog.users.BlogUserQuestions;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -41,9 +40,6 @@ public class GetCommentsSteps {
 
   @Steps
   CommonQuestions commonQuestions;
-
-  @Steps
-  ValidateEmail validateEmail;
 
   @Given("a blog post by user \"(.*)\"")
   public void a_blog_post_by_user(String user) {

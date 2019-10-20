@@ -49,7 +49,7 @@ public class GetUserSteps {
   }
 
   @And("the schema should match with the specification defined in \"(.*)\"")
-  public void theSchemaShouldMatchWithTheSpecification(String spec) {
+  public void the_schema_should_match_with_the_specification(String spec) {
     commonQuestions.verifyResponseSchema(lastResponse(), spec);
 
   }
