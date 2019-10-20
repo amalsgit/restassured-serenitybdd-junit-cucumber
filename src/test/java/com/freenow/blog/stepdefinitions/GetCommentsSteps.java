@@ -1,7 +1,6 @@
 package com.freenow.blog.stepdefinitions;
 
 import static net.serenitybdd.rest.SerenityRest.lastResponse;
-import static org.assertj.core.api.Assertions.assertThat;
 
 import com.freenow.blog.comments.CommentCalls;
 import com.freenow.blog.comments.CommentQuestions;
@@ -19,7 +18,6 @@ import java.util.List;
 import java.util.Map;
 import net.serenitybdd.core.Serenity;
 import net.thucydides.core.annotations.Steps;
-import org.assertj.core.api.SoftAssertions;
 
 public class GetCommentsSteps {
 
@@ -67,7 +65,8 @@ public class GetCommentsSteps {
 
   @Then("all comments for the post should be returned")
   public void all_comments_for_the_post_should_be_returned() {
-    assertThat(lastResponse().getBody().jsonPath().getList("").size()).isGreaterThan(1);
+    int commentCount = commentQuestions.getCommentCount(lastResponse());
+    commentQuestions.verifyNumberOfComments(commentCount, 5);
   }
 
   @When("I call the endpoint to get comments for a non-existent post")
@@ -83,7 +82,7 @@ public class GetCommentsSteps {
       Map singlePost = (Map) post;
       String postId = String.valueOf(singlePost.get("id"));
       commentCalls.getPostComments(postId);
-      List<String> mailId = lastResponse().getBody().jsonPath().getList("email");
+      List<String> mailId = commentQuestions.getMailIdFromComment(lastResponse());
       mailIds.addAll(mailId);
     }
     Serenity.setSessionVariable("mailIds").to(mailIds);
@@ -92,10 +91,6 @@ public class GetCommentsSteps {
   @Then("each comment should have an associated valid mailId")
   public void each_comment_should_have_an_associated_valid_mailId() {
     List<String> mailIds = Serenity.sessionVariableCalled("mailIds");
-    SoftAssertions softly = new SoftAssertions();
-    for (String mailid : mailIds) {
-      softly.assertThat(validateEmail.isValid(mailid)).isTrue();
-    }
-    softly.assertAll();
+    commentQuestions.verifyMailIdInComments(mailIds);
   }
 }

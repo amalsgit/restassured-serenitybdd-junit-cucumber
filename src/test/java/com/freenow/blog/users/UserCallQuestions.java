@@ -8,13 +8,13 @@ import net.thucydides.core.annotations.Step;
 public class UserCallQuestions {
 
   @Step("Get userId from response")
-  public String getUserId(Response lastResponse) {
-    return String.valueOf(lastResponse.getBody().jsonPath().getInt("[0].id"));
+  public String getUserId(Response userDetailResp) {
+    return String.valueOf(userDetailResp.getBody().jsonPath().getInt("[0].id"));
   }
 
   @Step("Get username from response")
-  public String getUserName(Response lastResponse) {
-    return (lastResponse.getBody().jsonPath().getString("[0].username"));
+  public String getUserName(Response userDetailResp) {
+    return (userDetailResp.getBody().jsonPath().getString("[0].username"));
   }
 
   @Step("Validate username {0} present in response")

@@ -11,8 +11,8 @@ import net.thucydides.core.annotations.Step;
 public class BlogPostQuestions {
 
   @Step("Get a postId from the response")
-  public String getPostId(Response lastResponse) {
-    return lastResponse.getBody().jsonPath().get("[0].id").toString();
+  public String getPostId(Response postDetailsResp) {
+    return postDetailsResp.getBody().jsonPath().get("[0].id").toString();
   }
 
   @Step("Verify userId for each post is matching the owner userId")
