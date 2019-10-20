@@ -45,7 +45,9 @@ Please run the below command from root directory to open the result after execut
 ```bash
 open target/site/serenity/index.html 
 ```
-A sample completed test report is attached in the ```serenity-results/index.html``` directory. 
+Reports can be seen in circleci, under the artifacts section `serenity/index.html`.
+Here is the direct link to one of the build artifact: https://18-215099279-gh.circle-artifacts.com/0/home/circleci/restassured-serenitybdd-junit-cucumber/target/site/serenity/index.html.
+
 The report records the API calls and its response in a very readable format as shown below.
 ![Sample Report Image](https://user-images.githubusercontent.com/22020329/67158844-02705300-f35b-11e9-8147-51b1137dcec8.png)
 
