@@ -5,7 +5,7 @@ import io.restassured.response.Response;
 import net.serenitybdd.rest.SerenityRest;
 import net.thucydides.core.annotations.Step;
 
-public class UserCalls {
+public class BlogUserActions {
 
   @Step("Get details for user {0}")
   public Response getUserDetails(String user) {

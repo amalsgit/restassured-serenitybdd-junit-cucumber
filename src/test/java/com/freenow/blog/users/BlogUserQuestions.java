@@ -5,7 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import io.restassured.response.Response;
 import net.thucydides.core.annotations.Step;
 
-public class UserCallQuestions {
+public class BlogUserQuestions {
 
   @Step("Get userId from response")
   public String getUserId(Response userDetailResp) {

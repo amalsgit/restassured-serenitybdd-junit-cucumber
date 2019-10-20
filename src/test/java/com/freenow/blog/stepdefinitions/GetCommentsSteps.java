@@ -2,14 +2,14 @@ package com.freenow.blog.stepdefinitions;
 
 import static net.serenitybdd.rest.SerenityRest.lastResponse;
 
-import com.freenow.blog.comments.CommentCalls;
+import com.freenow.blog.comments.CommentActions;
 import com.freenow.blog.comments.CommentQuestions;
 import com.freenow.blog.commontasks.CommonQuestions;
 import com.freenow.blog.commonutilities.ValidateEmail;
-import com.freenow.blog.posts.BlogPostCalls;
+import com.freenow.blog.posts.BlogPostActions;
 import com.freenow.blog.posts.BlogPostQuestions;
-import com.freenow.blog.users.UserCallQuestions;
-import com.freenow.blog.users.UserCalls;
+import com.freenow.blog.users.BlogUserQuestions;
+import com.freenow.blog.users.BlogUserActions;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -22,19 +22,19 @@ import net.thucydides.core.annotations.Steps;
 public class GetCommentsSteps {
 
   @Steps
-  UserCalls userCalls;
+  BlogUserActions blogUserActions;
 
   @Steps
-  BlogPostCalls blogPostCalls;
+  BlogPostActions blogPostActions;
 
   @Steps
   BlogPostQuestions blogPostQuestions;
 
   @Steps
-  UserCallQuestions userCallQuestions;
+  BlogUserQuestions blogUserQuestions;
 
   @Steps
-  CommentCalls commentCalls;
+  CommentActions commentActions;
 
   @Steps
   CommentQuestions commentQuestions;
@@ -47,19 +47,19 @@ public class GetCommentsSteps {
 
   @Given("a blog post by user \"(.*)\"")
   public void a_blog_post_by_user(String user) {
-    userCalls.getUserDetails(user);
+    blogUserActions.getUserDetails(user);
     commonQuestions.responseCodeIs(200, lastResponse());
-    String userId = userCallQuestions.getUserId(lastResponse());
+    String userId = blogUserQuestions.getUserId(lastResponse());
     Serenity.setSessionVariable("userId").to(userId);
 
-    blogPostCalls.getUserPost(userId);
+    blogPostActions.getUserPost(userId);
     String postId = blogPostQuestions.getPostId(lastResponse());
     Serenity.setSessionVariable("postId").to(postId);
   }
 
   @When("I call the endpoint to get comments for a post")
   public void i_call_the_endpoint_to_get_comments_for_a_post() {
-    commentCalls.getPostComments(Serenity.sessionVariableCalled("postId"));
+    commentActions.getPostComments(Serenity.sessionVariableCalled("postId"));
     commonQuestions.responseCodeIs(200, lastResponse());
   }
 
@@ -71,7 +71,7 @@ public class GetCommentsSteps {
 
   @When("I call the endpoint to get comments for a non-existent post")
   public void i_call_the_endpoint_to_get_comments_for_a_non_existent_post() {
-    commentCalls.getPostComments("999999");
+    commentActions.getPostComments("999999");
   }
 
   @When("I retrieve comments for each post")
@@ -81,7 +81,7 @@ public class GetCommentsSteps {
     for (Object post : posts) {
       Map singlePost = (Map) post;
       String postId = String.valueOf(singlePost.get("id"));
-      commentCalls.getPostComments(postId);
+      commentActions.getPostComments(postId);
       List<String> mailId = commentQuestions.getMailIdFromComment(lastResponse());
       mailIds.addAll(mailId);
     }
