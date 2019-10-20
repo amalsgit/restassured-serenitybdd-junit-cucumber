@@ -1,11 +1,11 @@
-# Java-Serenity-RestAssured-Cucumber-JUnit Sample API Automation Solution
+# Java-Serenity-RestAssured-Cucumber-JUnit-Maven Sample API Automation Solution
 [![CircleCI](https://circleci.com/gh/amalsgit/restassured-serenitybdd-junit-cucumber/tree/master.svg?style=svg)](https://circleci.com/gh/amalsgit/restassured-serenitybdd-junit-cucumber/tree/master)
 
 ## Introduction
 
 This is a sample Rest API test solution for sample endpoints available in https://jsonplaceholder.typicode.com/. The published APIs represent a blog application where users can publish post and comment on them.
 
-Tests are written using a combination of SerenityBDD, RestAssured, Cucumber and Junit.
+Tests are written using a combination of SerenityBDD, RestAssured, Cucumber, Junit & Maven.
 
 ## Framework & Design Considerations
 - Serenity BDD is a library that makes it easier to write high quality automated acceptance tests, with powerful reporting and living documentation features. It has strong support for both web testing with Selenium, and API testing using RestAssured.
@@ -54,6 +54,9 @@ The report records the API calls and its response in a very readable format as s
 Each step in tests are very clearly documented for readability and debugging in case of failures.
 
 ![Sample Report Steps](https://user-images.githubusercontent.com/22020329/67158871-63982680-f35b-11e9-82ae-b5e6422167d3.png)
+
+
+### Additional configurations
 
 Additional command line parameters can be passed for switching the application environment.
 ```json
