@@ -35,7 +35,6 @@ public class GetUserSteps {
   @Then("user details should be retrieved")
   public void user_details_should_be_retrieved() {
     commonQuestions.responseCodeIs(200, lastResponse());
-    userCallQuestions.verifyUserProperties(lastResponse());
   }
 
   @And("username should be \"(.*)\"")
@@ -47,5 +46,11 @@ public class GetUserSteps {
   public void empty_response_should_be_returned() {
     commonQuestions.responseCodeIs(200, lastResponse());
     commonQuestions.responseShouldBeEmptyList(lastResponse());
+  }
+
+  @And("the schema should match with the specification defined in \"(.*)\"")
+  public void theSchemaShouldMatchWithTheSpecification(String spec) {
+    commonQuestions.verifyResponseSchema(lastResponse(), spec);
+
   }
 }

@@ -5,7 +5,6 @@ import static net.serenitybdd.rest.SerenityRest.lastResponse;
 import com.freenow.blog.commontasks.CommonQuestions;
 import com.freenow.blog.posts.BlogPostCalls;
 import com.freenow.blog.posts.BlogPostQuestions;
-import com.freenow.blog.users.UserCallQuestions;
 import com.freenow.blog.users.UserCalls;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -28,9 +27,6 @@ public class GetPostSteps {
   @Steps
   CommonQuestions commonQuestions;
 
-  @Steps
-  UserCallQuestions userCallQuestions;
-
   @Given("\"(.*)\" has few post to (?:.*) name in the blog")
   public void user_has_few_posts_in_the_blog(String user) {
     userCalls.getUserDetails(user);
@@ -51,7 +47,6 @@ public class GetPostSteps {
 
     List<Object> posts = lastResponse().jsonPath().getList("");
     blogPostQuestions.verifyUserIdInPosts(posts);
-    blogPostQuestions.verifyPostProperties(lastResponse());
   }
 
   @When("I call the endpoint to get posts by the user with invalid user id")

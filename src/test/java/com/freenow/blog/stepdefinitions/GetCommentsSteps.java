@@ -68,7 +68,6 @@ public class GetCommentsSteps {
   @Then("all comments for the post should be returned")
   public void all_comments_for_the_post_should_be_returned() {
     assertThat(lastResponse().getBody().jsonPath().getList("").size()).isGreaterThan(1);
-    commentQuestions.verifyCommentProperties(lastResponse());
   }
 
   @When("I call the endpoint to get comments for a non-existent post")

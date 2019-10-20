@@ -2,6 +2,11 @@ Feature: Get user details
   As an admin user
   I should be able to get details of individual blog users
 
+  Scenario: "Get user details" response schema should match with specification
+    When I call the get user details endpoint for user "Samantha"
+    Then user details should be retrieved
+    And the schema should match with the specification defined in "user_details.json"
+
   Scenario: Should be able to get user details
     When I call the get user details endpoint for user "Samantha"
     Then user details should be retrieved

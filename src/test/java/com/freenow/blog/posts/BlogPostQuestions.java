@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 import net.serenitybdd.core.Serenity;
 import net.thucydides.core.annotations.Step;
-import org.assertj.core.api.SoftAssertions;
 
 public class BlogPostQuestions {
 
@@ -23,15 +22,5 @@ public class BlogPostQuestions {
       assertThat(post.get("userId").toString())
           .isEqualTo(Serenity.sessionVariableCalled("userId").toString());
     }
-  }
-
-  @Step("Verify the response body properties")
-  public void verifyPostProperties(Response lastResponse) {
-    SoftAssertions softly = new SoftAssertions();
-    softly.assertThat(lastResponse.getBody().jsonPath().getString("[0].userId")).isNotNull();
-    softly.assertThat(lastResponse.getBody().jsonPath().getString("[0].id")).isNotNull();
-    softly.assertThat(lastResponse.getBody().jsonPath().getString("[0].title")).isNotNull();
-    softly.assertThat(lastResponse.getBody().jsonPath().getString("[0].body")).isNotNull();
-    softly.assertAll();
   }
 }
