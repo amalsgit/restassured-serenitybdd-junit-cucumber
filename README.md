@@ -1,5 +1,5 @@
 # Java-Serenity-RestAssured-Cucumber-JUnit Sample API Automation Solution
-[![CircleCI](https://circleci.com/gh/amalsgit/restassured-serenitybdd-junit-cucumber.svg?style=svg)](https://circleci.com/gh/amalsgit/restassured-serenitybdd-junit-cucumber)
+https://circleci.com/gh/amalsgit/restassured-serenitybdd-junit-cucumber.svg?style=svg
 
 ## Introduction
 
